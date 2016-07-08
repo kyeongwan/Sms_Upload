@@ -17,6 +17,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     final private int SMS_PERMISSION = 1;
+    final private int RECEIVE_SMS = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)!= PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.SEND_SMS)) {   // 권한이 필요한지 설명해주어야 하는가?
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION);
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION);
+            }
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS)!= PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.RECEIVE_SMS)) {   // 권한이 필요한지 설명해주어야 하는가?
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, RECEIVE_SMS);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, RECEIVE_SMS);
+            }
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_MMS)!= PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.RECEIVE_MMS)) {   // 권한이 필요한지 설명해주어야 하는가?
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_MMS}, RECEIVE_SMS);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_MMS}, RECEIVE_SMS);
             }
         }
     }
@@ -56,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // 권한 거부
                 }
+                return;
+            case RECEIVE_SMS:
                 return;
         }
     }
