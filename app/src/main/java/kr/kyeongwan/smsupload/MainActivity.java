@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     final private int SMS_PERMISSION = 1;
     final private int RECEIVE_SMS = 2;
+    final private int READ_CONTACTS = 3;
+    final private int WRITE_CONTACTS = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,17 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, RECEIVE_SMS);
             }
         }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_CONTACTS)) {   // 권한이 필요한지 설명해주어야 하는가?
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, READ_CONTACTS);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, READ_CONTACTS);
+            }
+        }
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_MMS)!= PackageManager.PERMISSION_GRANTED) {
 
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.RECEIVE_MMS)) {   // 권한이 필요한지 설명해주어야 하는가?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECEIVE_MMS)) {   // 권한이 필요한지 설명해주어야 하는가?
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_MMS}, RECEIVE_SMS);
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_MMS}, RECEIVE_SMS);
